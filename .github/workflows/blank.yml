@@ -8,30 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+        
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Az Module
-        shell: pwsh
+      - name: Trigger Azure Automation Runbook via Webhook
         run: |
-          Install-Module -Name Az -Force -Scope CurrentUser -AllowClobber
-          Import-Module Az
+          curl -X POST -H "Content-Type: application/json" -d '{}' \
+          "https://90885599-fa55-4ebd-8e14-edb17606ae06.webhook.eus.azure-automation.net/webhooks?token=zlvh9z2sHkGHHTQMjB2SIylO0IuUAaArk7hJId3Kgs8%3d”
+          
 
-      - name: Login to Azure
-        shell: pwsh
-        run: |
-          $creds = '${{ secrets.AZURE_CREDENTIALS }}' | ConvertFrom-Json
-          $securePassword = ConvertTo-SecureString $creds.clientSecret -AsPlainText -Force
-          $psCred = New-Object System.Management.Automation.PSCredential ($creds.clientId, $securePassword)
-          Connect-AzAccount -ServicePrincipal -Credential $psCred -TenantId $creds.tenantId
-
-      - name: Run PowerShell Script
-        shell: pwsh
-        env:
-          VM_USERNAME: ${{ secrets.VM_USERNAME }}
-          VM_PASSWORD: ${{ secrets.VM_PASSWORD }}
-        run: ./create-vm.ps1
-
+    
 
