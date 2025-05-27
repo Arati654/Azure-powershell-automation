@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Variables
+=======
+		# Variables
+>>>>>>> af8fd9d (inital commit)
 $resourceGroup = "ProjectNew"
 $location = "EastUS"
 $vmName = "PSAutoVM"
@@ -17,5 +21,10 @@ New-AzVm `
   -SecurityGroupName "${vmName}NSG" `
   -PublicIpAddressName "${vmName}PublicIP" `
   -Credential $credential `
+<<<<<<< HEAD
   -ImageName "Win2019Datacenter" `
   -OpenPorts 80,3389 `
+=======
+  -ImageName "Win2019Datacenter" `
+  -OpenPorts 80,3389 `
+>>>>>>> af8fd9d (inital commit)
