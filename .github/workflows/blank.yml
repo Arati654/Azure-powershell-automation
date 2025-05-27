@@ -2,19 +2,14 @@ name: Azure PowerShell Automation
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  build:
+  trigger-runbook:
     runs-on: ubuntu-latest
-        
+
     steps:
       - name: Trigger Azure Automation Runbook via Webhook
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{}' \
-          "https://90885599-fa55-4ebd-8e14-edb17606ae06.webhook.eus.azure-automation.net/webhooks?token=zlvh9z2sHkGHHTQMjB2SIylO0IuUAaArk7hJId3Kgs8%3d”
-          
-
-    
-
+          "https://90885599-fa55-4ebd-8e14-edb17606ae06.webhook.eus.azure-automation.net/webhooks?token=zlvh9z2sHkGHHTQMjB2SIylO0IuUAaArk7hJId3Kgs8%3d"
